@@ -32,9 +32,9 @@ You can download ChromeDriver here: <https://sites.google.com/a/chromium.org/chr
 
 Then you have multiple options:
 
-add it to your system path
-put it in the same directory as your python script
-specify the location directly via executable_path
+* add it to your system path
+* put it in the same directory as your python script
+* specify the location directly via executable_path
 
 driver = webdriver.Chrome(executable_path='C:/path/to/chromedriver.exe')
 
