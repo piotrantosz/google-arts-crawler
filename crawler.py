@@ -5,10 +5,42 @@ import collections
 import numpy as np
 import os
 import shutil
+import click
 
 from selenium import webdriver
 from PIL import Image
 from slugify import slugify
+
+DEFAULT_SIZE = 12000
+
+@click.command()
+@click.option(
+    "--url",
+    help="Image URL e.g. https://artsandculture.google.com/asset/madame-moitessier/hQFUe-elM1npbw"
+)
+@click.option(
+    "--size",
+    default=DEFAULT_SIZE,
+    help="Max image size (default is 12000). Ignored if not using the --url option."
+)
+@click.option(
+    "--raise-errors",
+    is_flag=True,
+    help="Raise errors instead of just printing them. Useful for debugging."
+)
+def main(url, size, raise_errors):
+    try:
+        cleanup()
+        if not url:
+            url, size = get_user_input()
+        print("> Opening website")
+        generate_image(url, size, raise_errors)
+        cleanup()
+    except Exception as e:
+        print("FAILED")
+        if raise_errors:
+            raise e
+        print(e)
 
 
 def get_user_input():
@@ -21,13 +53,15 @@ def get_user_input():
     print("=====================================")
     print("Provide image maximum SIZE")
     print("sample size: 12000 (recommended)")
-    size = int(input('> SIZE: '))
+    size = input('> SIZE: ')
+    if size:
+        size = int(size)
+    else:
+        size = DEFAULT_SIZE
     print("=====================================")
-    print("> Opening website")
-    generate_image(url, size)
+    return url, size
 
-
-def generate_image(url, size, delay=5):
+def generate_image(url, size, raise_errors, delay=5):
     mobile_emulation = {
         "deviceMetrics": {"width": size, "height": size, "pixelRatio": 1.0},
         "userAgent": "Mozilla/5.0 (Linux; Android 4.2.1; en-us; Nexus 5 Build/JOP40D) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19"}
@@ -70,9 +104,14 @@ def generate_image(url, size, delay=5):
             # Create PIL objects list
             try:
                 pil_images.append(Image.open('blobs/{0}.jpg'.format(i)))
-            except Exception:
+            except Exception as e:
+                print("Exception raised")
                 cleanup()
-                generate_image(delay+10)
+                if raise_errors:
+                    raise e
+                print(str(e))
+                print('Trying again...')
+                generate_image(url, size, raise_errors, delay+10)
 
         i += 1
 
@@ -140,10 +179,6 @@ def cleanup():
     if not os.path.exists('output'):
         os.makedirs('output')
 
-try:
-    cleanup()
-    get_user_input()
-    cleanup()
-except Exception as e:
-    print("FAILED")
-    print(e)
+if __name__ == '__main__':
+    main()
+
