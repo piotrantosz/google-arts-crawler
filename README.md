@@ -1,6 +1,8 @@
 # Google Arts & Culture crawler
 Google Arts &amp; Culture high quality image downloader
 
+Download images from Google Arts and Culture in high resolution
+
 Using this script you can download any image from <https://artsandculture.google.com/> in high quality (even 12k!)
 
 _Warning: it's simple and ugly code created at one night. It might be full of bugs._
