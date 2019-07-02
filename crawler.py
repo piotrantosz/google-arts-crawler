@@ -91,6 +91,10 @@ def generate_image(url, size, raise_errors, delay=5):
             style = style.replace('transform: translate3d(', '')
             positions = list(map(int, re.findall(r'\d+', style)))
 
+            if len(positions) < 2:
+                # The positions are not available for this image - skip
+                continue
+
             columns.append(positions[0])
             rows.append(positions[1])
 
