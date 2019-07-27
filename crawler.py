@@ -6,12 +6,14 @@ import numpy as np
 import os
 import shutil
 import click
+import pyperclip
 
 from selenium import webdriver
 from PIL import Image
 from slugify import slugify
 
 DEFAULT_SIZE = 12000
+DEFAULT_HOST = 'artsandculture.google.com'
 
 @click.command()
 @click.option(
@@ -31,7 +33,8 @@ DEFAULT_SIZE = 12000
 def main(url, size, raise_errors):
     try:
         cleanup()
-        if not url:
+        url = pyperclip.paste()
+        if not DEFAULT_HOST in url:
             url, size = get_user_input()
         print("> Opening website")
         generate_image(url, size, raise_errors)
@@ -67,6 +70,8 @@ def generate_image(url, size, raise_errors, delay=5):
         "userAgent": "Mozilla/5.0 (Linux; Android 4.2.1; en-us; Nexus 5 Build/JOP40D) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19"}
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
+    chrome_options.add_argument('--headless')
+    #chrome_options.add_argument('--disable-gpu')
     browser = webdriver.Chrome(options=chrome_options)
     browser.set_window_position(-5000, 0)
     browser.get(url)
