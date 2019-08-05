@@ -28,6 +28,11 @@ _If you got any trouble, just send me an email boquete37@gmail.com_
 	cd C:\your\path\to\google-arts-crawler\
 	pip install -r requirements.txt
 	python crawler.py
+	
+	
+crawler_w.py file is only for Windows and if you have chromedriver in the same folder as this script.
+It will work without editing anything if you have a stable version of chrome.
+If you have non-stable chrome (other chromium browsers like Brave), you need to change this line `options.binary_location = "and add path here"`.
 
 ## Usage
 
