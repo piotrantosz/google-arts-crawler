@@ -21,6 +21,7 @@ WINDOWS = os.name == 'nt'
 LINUX = sys.platform.startswith('linux')
 DARWIN = sys.platform.startswith('darwin')
 
+
 def is_blank(value: Optional[Union[int, str, dict, list, bytes, tuple, object]]) -> bool:
     if value is None:
         return True
@@ -195,8 +196,10 @@ class GoogleArtsCrawlerOption(object):
         if not os.path.isdir(self._partial_tmp_path):
             os.makedirs(self._partial_tmp_path)
         if self._is_debug:
-            # TODO
-            print("GoogleArtsCrawlerOptions===>")
+            print("GoogleArtsCrawlerOptions:")
+            print("==> url:{0}".format(self._url))
+            print("==> webdriver_execute_path:{0}".format(self._webdriver_execute_path))
+            print("==> output :{0}".format(os.path.abspath(self._output_path)))
 
         return self
 
@@ -286,6 +289,14 @@ class GoogleArtsCrawlerOption(object):
 
     def set_need_clear_cache(self, need_clear_cache: bool):
         self._need_clear_cache = need_clear_cache
+        return self
+
+    @property
+    def is_debug(self):
+        return self._is_debug
+
+    def set_debug(self, is_debug: bool):
+        self._is_debug = is_debug
         return self
 
 
@@ -457,4 +468,5 @@ if __name__ == '__main__':
                              .set_output_path("custom_output_dir")
                              .set_output_filename("custom.jpg")
                              .set_need_clear_cache(True)
+                             .set_debug(True)
                              .prepare_options()).process()
