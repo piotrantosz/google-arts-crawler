@@ -197,10 +197,7 @@ class GoogleArtsCrawlerOption(object):
         if LINUX or DARWIN:
             os.chmod(self._webdriver_execute_path, 0o777)
 
-        if LINUX:
-            os.environ['PATH'] = '{0}:{1}'.format(os.environ['PATH'], os.path.dirname(os.path.abspath(self._webdriver_execute_path)))
-            os.environ['PATH'] = '{0}:{1}'.format(os.environ['PATH'], os.path.abspath(self._webdriver_execute_path))
-            print("==> {0}".format(os.environ['PATH']))
+        self._chrome_options.binary_location = self._webdriver_execute_path
 
         mobile_emulation = {
             "deviceMetrics": {"width": self._size, "height": self._size, "pixelRatio": 1.0},
