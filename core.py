@@ -176,9 +176,6 @@ class GoogleArtsCrawlerOption(object):
                 if self._need_clear_cache:
                     shutil.rmtree(default_download_tmp)
                 self._webdriver_execute_path = os.path.join(default_webdrive_path, os.listdir(default_webdrive_path)[0])
-        if LINUX:
-            os.environ['PATH'] = '{0}:{1}'.format(os.environ['PATH'], os.path.abspath(self._webdriver_execute_path))
-            print("==> {0}".format(os.environ['PATH']))
 
         if is_blank(self._webdriver_execute_path):
             raise Exception("GoogleArtsCrawlerOption , webdriver_execute_path is blank!")
@@ -187,6 +184,10 @@ class GoogleArtsCrawlerOption(object):
 
         if LINUX or DARWIN:
             os.chmod(self._webdriver_execute_path, 0o777)
+
+        if LINUX:
+            os.environ['PATH'] = '{0}:{1}'.format(os.environ['PATH'], os.path.abspath(self._webdriver_execute_path))
+            print("==> {0}".format(os.environ['PATH']))
 
         mobile_emulation = {
             "deviceMetrics": {"width": self._size, "height": self._size, "pixelRatio": 1.0},
