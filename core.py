@@ -136,13 +136,17 @@ class GoogleArtsCrawlerOption(object):
 
             if self._webdriver_execute_path is None:
                 if WINDOWS:
+                    os_name = "Windows"
                     webdriver_download_url = "http://chromedriver.storage.googleapis.com/78.0.3904.70/chromedriver_win32.zip"
                 elif DARWIN:
+                    os_name = "Mac OS"
                     webdriver_download_url = "http://chromedriver.storage.googleapis.com/78.0.3904.70/chromedriver_mac64.zip"
                 elif LINUX:
+                    os_name = "Linux"
                     webdriver_download_url = "http://chromedriver.storage.googleapis.com/78.0.3904.70/chromedriver_linux64.zip"
                 else:
                     raise Exception("GoogleArtsCrawlerOptions, unknown platform !")
+                print("==> current operation system : {0}".format(os_name))
                 print("==> prepare download webdriver : {0}".format(webdriver_download_url))
                 default_download_tmp = "tmp"
                 webdriver_zip_filename = webdriver_download_url.split("/")[-1]
@@ -172,6 +176,9 @@ class GoogleArtsCrawlerOption(object):
                 if self._need_clear_cache:
                     shutil.rmtree(default_download_tmp)
                 self._webdriver_execute_path = os.path.join(default_webdrive_path, os.listdir(default_webdrive_path)[0])
+                if LINUX:
+                    os.environ['PATH'] = '{0}:{1}'.format(os.environ['PATH'],os.path.abspath(self._webdriver_execute_path))
+                    print("==> {0}".format(os.environ['PATH']))
 
         if is_blank(self._webdriver_execute_path):
             raise Exception("GoogleArtsCrawlerOption , webdriver_execute_path is blank!")
