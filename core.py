@@ -312,6 +312,7 @@ class GoogleArtsCrawlerProcess(object):
         """
 
         self._gaco = gaco
+        print(os.path.abspath(self._gaco.webdriver_execute_path))
         self._browser = webdriver.Chrome(options=self._gaco.chrome_options,
                                          executable_path=self._gaco.webdriver_execute_path)
         self._local_partial_tmp = None
