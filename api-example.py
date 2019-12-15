@@ -5,6 +5,13 @@
  Author: Helixcs
  File: example.py
  Time: 2019/12/15
+
+ You should install `google-chrome` at first when used in Linux
+
+    wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+    echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
+    sudo apt-get update
+    sudo apt-get install google-chrome-stable
 """
 from selenium.webdriver import ChromeOptions
 

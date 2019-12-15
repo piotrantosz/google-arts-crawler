@@ -1,0 +1,9 @@
+click==7.0
+numpy==1.16.0
+pillow==5.4.1
+pyperclip==1.7.0
+pysocks==1.7.1
+python-slugify==2.0.1
+selenium==3.141.0
+unidecode==1.1.1
+urllib3==1.24.1
