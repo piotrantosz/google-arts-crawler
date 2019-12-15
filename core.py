@@ -166,9 +166,9 @@ class GoogleArtsCrawlerOption(object):
 
                 # not exist
                 if not os.path.isfile(webdriver_local_zip_filepath):
-                    # proxy = SOCKSProxyManager('socks5://localhost:1086/')
-                    http = PoolManager()
-                    response = http.request('GET', webdriver_download_url, preload_content=False)
+                    proxy = SOCKSProxyManager('socks5://localhost:1086/')
+                    # http = PoolManager()
+                    response = proxy.request('GET', webdriver_download_url, preload_content=False)
                     if not os.path.isdir(default_download_tmp):
                         os.mkdir(default_download_tmp)
                     with open(webdriver_local_zip_filepath, mode="wb") as fd:
@@ -197,7 +197,7 @@ class GoogleArtsCrawlerOption(object):
         if LINUX or DARWIN:
             os.chmod(self._webdriver_execute_path, 0o777)
 
-        self._chrome_options.binary_location = os.path.abspath(self._webdriver_execute_path)
+        # self._chrome_options.binary_location = os.path.abspath(self._webdriver_execute_path)
 
         mobile_emulation = {
             "deviceMetrics": {"width": self._size, "height": self._size, "pixelRatio": 1.0},
@@ -470,9 +470,13 @@ class GoogleArtsCrawlerProcess(object):
 if __name__ == '__main__':
     chrome_option = ChromeOptions()
     chrome_option.add_argument("--headless")
-    chrome_option.add_argument('--headless')
     chrome_option.add_argument('--no-sandbox')
     chrome_option.add_argument('--disable-dev-shm-usage')
+    chrome_option.add_argument('--disable-gpu')
+    chrome_option.add_argument("--disable-dev-shm-usage")
+    chrome_option.add_argument("start-maximized")
+    chrome_option.add_argument("disable-infobars")
+    chrome_option.add_argument("--disable-extensions")
     # GoogleArtsCrawlerOption() \
     #     .set_url("https://artsandculture.google.com/asset/madame-moitessier/hQFUe-elM1npbw") \
     #     .set_chrome_options(chrome_option) \
@@ -488,7 +492,7 @@ if __name__ == '__main__':
                              .set_url("https://artsandculture.google.com/asset/madame-moitessier/hQFUe-elM1npbw")
                              .set_chrome_options(chrome_option)
                              .set_need_download_webdrive(True)
-                             .set_webdriver_execute_path("webdriver/chromedriver")
+                             # .set_webdriver_execute_path("webdriver/chromedriver")
                              .set_partial_tmp_path("custom_partial_dir")
                              .set_output_path("custom_output_dir")
                              .set_output_filename("custom.jpg")
