@@ -187,6 +187,7 @@ class GoogleArtsCrawlerOption(object):
 
         if LINUX:
             os.environ['PATH'] = '{0}:{1}'.format(os.environ['PATH'], os.path.dirname(os.path.abspath(self._webdriver_execute_path)))
+            os.environ['PATH'] = '{0}:{1}'.format(os.environ['PATH'], os.path.abspath(self._webdriver_execute_path))
             print("==> {0}".format(os.environ['PATH']))
 
         mobile_emulation = {
