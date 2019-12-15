@@ -198,7 +198,7 @@ class GoogleArtsCrawlerOption(object):
         if self._is_debug:
             print("GoogleArtsCrawlerOptions:")
             print("==> url:{0}".format(self._url))
-            print("==> webdriver_execute_path:{0}".format(self._webdriver_execute_path))
+            print("==> webdriver_execute_path:{0}".format(os.path.abspath(self._webdriver_execute_path)))
             print("==> output :{0}".format(os.path.abspath(self._output_path)))
 
         return self
@@ -463,7 +463,7 @@ if __name__ == '__main__':
                              .set_url("https://artsandculture.google.com/asset/madame-moitessier/hQFUe-elM1npbw")
                              .set_chrome_options(chrome_option)
                              .set_need_download_webdrive(True)
-                             # .set_webdriver_execute_path("webdriver/chromedriver")
+                             .set_webdriver_execute_path("webdriver/chromedriver")
                              .set_partial_tmp_path("custom_partial_dir")
                              .set_output_path("custom_output_dir")
                              .set_output_filename("custom.jpg")
