@@ -1,0 +1,19 @@
+[[source]]
+name = "pypi"
+url = "https://mirrors.aliyun.com/pypi/simple/"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+click = "==7.0"
+numpy = "==1.16.0"
+pillow = "==5.4.1"
+python-slugify = "==2.0.1"
+selenium = "==3.141.0"
+urllib3 = "==1.24.1"
+pysocks = "*"
+pyperclip = "*"
+
+[requires]
+python_version = "3.6"
