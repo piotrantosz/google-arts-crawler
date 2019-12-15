@@ -477,6 +477,7 @@ if __name__ == '__main__':
     chrome_option.add_argument("start-maximized")
     chrome_option.add_argument("disable-infobars")
     chrome_option.add_argument("--disable-extensions")
+
     # GoogleArtsCrawlerOption() \
     #     .set_url("https://artsandculture.google.com/asset/madame-moitessier/hQFUe-elM1npbw") \
     #     .set_chrome_options(chrome_option) \
