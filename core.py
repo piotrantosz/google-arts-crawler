@@ -19,8 +19,7 @@ from slugify import slugify
 
 WINDOWS = os.name == 'nt'
 LINUX = sys.platform.startswith('linux')
-POSIX = os.name == 'posix'
-
+DARWIN = sys.platform.startswith('darwin')
 
 def is_blank(value: Optional[Union[int, str, dict, list, bytes, tuple, object]]) -> bool:
     if value is None:
@@ -137,7 +136,7 @@ class GoogleArtsCrawlerOption(object):
             if self._webdriver_execute_path is None:
                 if WINDOWS:
                     webdriver_download_url = "http://chromedriver.storage.googleapis.com/78.0.3904.70/chromedriver_win32.zip"
-                elif POSIX:
+                elif DARWIN:
                     webdriver_download_url = "http://chromedriver.storage.googleapis.com/78.0.3904.70/chromedriver_mac64.zip"
                 elif LINUX:
                     webdriver_download_url = "http://chromedriver.storage.googleapis.com/78.0.3904.70/chromedriver_linux64.zip"
@@ -178,7 +177,7 @@ class GoogleArtsCrawlerOption(object):
         if not os.path.isfile(self._webdriver_execute_path):
             raise Exception("GoogleArtsCrawlerOption , webdriver_execute_path is not exist, this is file!")
 
-        if LINUX or POSIX:
+        if LINUX or DARWIN:
             os.chmod(self._webdriver_execute_path, 0o777)
 
         mobile_emulation = {
