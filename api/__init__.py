@@ -3,10 +3,15 @@
 """
  Verion: 1.0
  Author: Helixcs
- Site: https://iliangqunru.bitcron.com/
  Time: 2019/12/15
  Reference :
  https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver#requirements
+ https://www.srcmake.com/home/selenium-python-chromedriver-ubuntu
+
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
+sudo apt-get update
+sudo apt-get install google-chrome-stable
 
 """
 
@@ -166,7 +171,7 @@ class GoogleArtsCrawlerOption(object):
 
                 # not exist
                 if not os.path.isfile(webdriver_local_zip_filepath):
-                    # proxy = SOCKSProxyManager('socks5://localhost:1086/')
+                    # http = SOCKSProxyManager('socks5://localhost:1086/')
                     http = PoolManager()
                     response = http.request('GET', webdriver_download_url, preload_content=False)
                     if not os.path.isdir(default_download_tmp):
@@ -204,6 +209,15 @@ class GoogleArtsCrawlerOption(object):
             "userAgent": "Mozilla/5.0 (Linux; Android 4.2.1; en-us; Nexus 5 Build/JOP40D) AppleWebKit/535.19 "
                          "(KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19"}
         self._chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
+        self._chrome_options.add_argument('--no-sandbox')
+        self._chrome_options.add_argument('--disable-dev-shm-usage')
+        self._chrome_options.add_argument('--disable-gpu')
+        self._chrome_options.add_argument("--disable-dev-shm-usage")
+        self._chrome_options.add_argument("start-maximized")
+        self._chrome_options.add_argument("disable-infobars")
+        self._chrome_options.add_argument("--disable-extensions")
+        if not self._is_debug:
+            self._chrome_options.add_argument("--headless")
 
         self._output_path = DEFAULT_GCO_OUTPUT_PATH if self._output_path is None else self._output_path
         self._size = DEFAULT_GCO_SIZE if self._size is None or self._size < 1 else self._size
@@ -467,36 +481,4 @@ class GoogleArtsCrawlerProcess(object):
         pil_images = None
 
 
-if __name__ == '__main__':
-    chrome_option = ChromeOptions()
-    chrome_option.add_argument("--headless")
-    chrome_option.add_argument('--no-sandbox')
-    chrome_option.add_argument('--disable-dev-shm-usage')
-    chrome_option.add_argument('--disable-gpu')
-    chrome_option.add_argument("--disable-dev-shm-usage")
-    chrome_option.add_argument("start-maximized")
-    chrome_option.add_argument("disable-infobars")
-    chrome_option.add_argument("--disable-extensions")
-
-    # GoogleArtsCrawlerOption() \
-    #     .set_url("https://artsandculture.google.com/asset/madame-moitessier/hQFUe-elM1npbw") \
-    #     .set_chrome_options(chrome_option) \
-    #     .set_need_download_webdrive(True) \
-    #     .set_webdriver_execute_path("webdriver/chromedriver") \
-    #     .set_partial_tmp_path("custom_partial_dir") \
-    #     .set_output_path("custom_output_dir") \
-    #     .set_output_filename("custom.jpg") \
-    #     .set_need_clear_cache(True) \
-    #     .set_debug(True) \
-    #     .prepare_options()
-    GoogleArtsCrawlerProcess(gaco=GoogleArtsCrawlerOption()
-                             .set_url("https://artsandculture.google.com/asset/madame-moitessier/hQFUe-elM1npbw")
-                             .set_chrome_options(chrome_option)
-                             .set_need_download_webdrive(True)
-                             # .set_webdriver_execute_path("webdriver/chromedriver")
-                             .set_partial_tmp_path("custom_partial_dir")
-                             .set_output_path("custom_output_dir")
-                             .set_output_filename("custom.jpg")
-                             .set_need_clear_cache(True)
-                             .set_debug(True)
-                             .prepare_options()).process()
+from . import GoogleArtsCrawlerProcess, GoogleArtsCrawlerOption
