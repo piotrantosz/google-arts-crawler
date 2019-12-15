@@ -15,6 +15,7 @@ _If you got any trouble, just send me an email boquete37@gmail.com_
 ### Anconda And  Pipenv
 
 *  Use Anconda to init Python3.6
+
 `conda create -n py36 python=3.6`
 
 *  Active Python3.6
