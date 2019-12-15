@@ -1,3 +1,15 @@
+# -*- coding:utf-8 -*-
+
+"""
+ Verion: 1.0
+ Author: Helixcs
+ Site: https://iliangqunru.bitcron.com/
+ Time: 2019/12/15
+ Reference :
+ https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver#requirements
+
+"""
+
 import time
 import base64
 import re
@@ -461,6 +473,9 @@ class GoogleArtsCrawlerProcess(object):
 if __name__ == '__main__':
     chrome_option = ChromeOptions()
     chrome_option.add_argument("--headless")
+    chrome_option.add_argument('--headless')
+    chrome_option.add_argument('--no-sandbox')
+    chrome_option.add_argument('--disable-dev-shm-usage')
     # GoogleArtsCrawlerOption() \
     #     .set_url("https://artsandculture.google.com/asset/madame-moitessier/hQFUe-elM1npbw") \
     #     .set_chrome_options(chrome_option) \
