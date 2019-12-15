@@ -12,6 +12,35 @@ _If you got any trouble, just send me an email boquete37@gmail.com_
 
 ## Installation
 
+### Anconda And  Pipenv
+
+* 1. Use Anconda to init Python3.6
+
+`conda create -n py36 python=3.6`
+
+* 2. Active Python3.6
+
+`conda activate py36`
+
+`python -V`
+
+* 3. Install pipenv
+
+`pip install pipenv`
+
+* 4. Init pipenv environment
+
+`git clone https://github.com/Boquete/google-arts-crawler.git`
+
+`cd google-arts-crawler/`
+
+`pipenv install`
+
+* 5. Run 
+`python crawler.py`
+
+`python api-example.py`
+
 ### Linux
 * `git clone https://github.com/Boquete/google-arts-crawler.git`
 * `cd google-arts-crawler/`
