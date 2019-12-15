@@ -460,25 +460,25 @@ class GoogleArtsCrawlerProcess(object):
 if __name__ == '__main__':
     chrome_option = ChromeOptions()
     chrome_option.add_argument("--headless")
-    GoogleArtsCrawlerOption() \
-        .set_url("https://artsandculture.google.com/asset/madame-moitessier/hQFUe-elM1npbw") \
-        .set_chrome_options(chrome_option) \
-        .set_need_download_webdrive(True) \
-        .set_webdriver_execute_path("webdriver/chromedriver") \
-        .set_partial_tmp_path("custom_partial_dir") \
-        .set_output_path("custom_output_dir") \
-        .set_output_filename("custom.jpg") \
-        .set_need_clear_cache(True) \
-        .set_debug(True) \
-        .prepare_options()
-    # GoogleArtsCrawlerProcess(gaco=GoogleArtsCrawlerOption()
-    #                          .set_url("https://artsandculture.google.com/asset/madame-moitessier/hQFUe-elM1npbw")
-    #                          .set_chrome_options(chrome_option)
-    #                          .set_need_download_webdrive(True)
-    #                          .set_webdriver_execute_path("webdriver/chromedriver")
-    #                          .set_partial_tmp_path("custom_partial_dir")
-    #                          .set_output_path("custom_output_dir")
-    #                          .set_output_filename("custom.jpg")
-    #                          .set_need_clear_cache(True)
-    #                          .set_debug(True)
-    #                          .prepare_options()).process()
+    # GoogleArtsCrawlerOption() \
+    #     .set_url("https://artsandculture.google.com/asset/madame-moitessier/hQFUe-elM1npbw") \
+    #     .set_chrome_options(chrome_option) \
+    #     .set_need_download_webdrive(True) \
+    #     .set_webdriver_execute_path("webdriver/chromedriver") \
+    #     .set_partial_tmp_path("custom_partial_dir") \
+    #     .set_output_path("custom_output_dir") \
+    #     .set_output_filename("custom.jpg") \
+    #     .set_need_clear_cache(True) \
+    #     .set_debug(True) \
+    #     .prepare_options()
+    GoogleArtsCrawlerProcess(gaco=GoogleArtsCrawlerOption()
+                             .set_url("https://artsandculture.google.com/asset/madame-moitessier/hQFUe-elM1npbw")
+                             .set_chrome_options(chrome_option)
+                             .set_need_download_webdrive(True)
+                             .set_webdriver_execute_path("webdriver/chromedriver")
+                             .set_partial_tmp_path("custom_partial_dir")
+                             .set_output_path("custom_output_dir")
+                             .set_output_filename("custom.jpg")
+                             .set_need_clear_cache(True)
+                             .set_debug(True)
+                             .prepare_options()).process()
