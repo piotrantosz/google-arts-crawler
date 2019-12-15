@@ -2,7 +2,6 @@ import time
 import base64
 import re
 import collections
-from stat import S_IRWXG
 from zipfile import ZipFile
 
 import numpy as np
