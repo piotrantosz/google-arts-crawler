@@ -166,9 +166,9 @@ class GoogleArtsCrawlerOption(object):
 
                 # not exist
                 if not os.path.isfile(webdriver_local_zip_filepath):
-                    proxy = SOCKSProxyManager('socks5://localhost:1086/')
-                    # http = PoolManager()
-                    response = proxy.request('GET', webdriver_download_url, preload_content=False)
+                    # proxy = SOCKSProxyManager('socks5://localhost:1086/')
+                    http = PoolManager()
+                    response = http.request('GET', webdriver_download_url, preload_content=False)
                     if not os.path.isdir(default_download_tmp):
                         os.mkdir(default_download_tmp)
                     with open(webdriver_local_zip_filepath, mode="wb") as fd:
