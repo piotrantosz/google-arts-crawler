@@ -177,8 +177,6 @@ class GoogleArtsCrawlerOption(object):
                     shutil.rmtree(default_download_tmp)
                 self._webdriver_execute_path = os.path.join(default_webdrive_path, os.listdir(default_webdrive_path)[0])
 
-        print("==> current operation system : {0}".format(os_name))
-
         if is_blank(self._webdriver_execute_path):
             raise Exception("GoogleArtsCrawlerOption , webdriver_execute_path is blank!")
         if not os.path.isfile(self._webdriver_execute_path):
