@@ -138,7 +138,7 @@ def generate_image(url, size, raise_errors, delay=5):
 
     print("> Saving partial images as final image")
     grid = pil_grid(inverted_pil_images, columns)
-    grid.save('output/' + title + '.jpg')
+    grid.save('output/' + title + '-' + url[-14:] +'.jpg')
     print("> SUCCESS! Image location: output/{0}.jpg".format(title))
     browser.close()
 
