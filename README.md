@@ -8,7 +8,7 @@ Using this script you can download any image from <https://artsandculture.google
 _Warning: it's simple and ugly code created at one night. It might be full of bugs._
 _Feel free to do anything you want with this code_
 
-_If you got any trouble, just send me an email boquete37@gmail.com_
+
 
 ## Installation
 
